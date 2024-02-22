@@ -7,7 +7,7 @@ let win = false;
 let snowflakes = [];
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(800, 500);
   snowman = new Snowman(width / 2, 100); // Position snowman at the center horizontally
 
   // Generate snowflakes
@@ -40,6 +40,11 @@ function draw() {
       flake.y = 0;
     }
   }
+
+  //ground
+  fill(255, 255, 255);
+  noStroke();
+  rect(0, height - 20, width, 20);
 
   // Draw snowman (rocket)
   if (state === "game") {
@@ -105,8 +110,8 @@ function Snowman(x, y) {
   };
 
   this.update = function () {
-    if (this.pos.y >= height - 40) {
-      if (this.vel.y <= 2 && this.pos.y >= height - 50) {
+    if (this.pos.y >= 420) {
+      if (this.vel.y <= 2 && this.pos.y >= height - 421) {
         // Snowman landed safely
         win = true;
       }
