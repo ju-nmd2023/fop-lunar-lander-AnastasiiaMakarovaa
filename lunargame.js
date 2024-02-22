@@ -29,7 +29,7 @@ function draw() {
   // Draw snowflakes
   for (let flake of snowflakes) {
     noStroke();
-    fill(255);
+    fill(255, 255, 255);
     ellipse(flake.x, flake.y, flake.diameter);
 
     // Move the flake down
@@ -63,7 +63,9 @@ function draw() {
       width / 2,
       height / 2 + 50
     );
-    snowman.show(); // Draw snowman regardless of win state
+    if (win) {
+      snowman.show(); // Draw snowman only if landed safely
+    }
   }
 }
 
@@ -93,11 +95,11 @@ function keyReleased() {
 
 function Snowman(x, y) {
   this.pos = createVector(x, y);
-  this.vel = createVector(0, 0);
+  this.vel = createVector(0, 0); // Initialize velocity vector
   this.acc = createVector(0, 0);
 
   this.applyThrust = function (force) {
-    let thrust = p5.Vector.fromAngle(-HALF_PI);
+    let thrust = createVector(0, -1);
     thrust.mult(force);
     this.acc.add(thrust);
   };
@@ -134,11 +136,11 @@ function Snowman(x, y) {
     ellipse(this.pos.x + 10, this.pos.y - 30, 10, 10);
 
     // Mouth
-    fill(255, 0, 0); // Red color for scarf
+    fill(255, 0, 0);
     rect(this.pos.x - 15, this.pos.y - 15, 30, 5);
 
     // Carrot nose
-    fill(255, 165, 0); // Orange color for carrot
+    fill(255, 165, 0);
     triangle(
       this.pos.x - 5,
       this.pos.y - 20,
@@ -149,15 +151,16 @@ function Snowman(x, y) {
     );
   };
 }
+
 function startScreen() {
-  fill(255);
+  fill(255, 255, 255);
   textAlign(CENTER);
   textSize(32);
   text("Press Space or Arrow Down to Start", width / 2, height / 2);
 }
 
 function resultScreen(message) {
-  fill(255);
+  fill(255, 255, 255);
   textAlign(CENTER);
   textSize(32);
   text(message, width / 2, height / 2);
@@ -166,6 +169,7 @@ function resultScreen(message) {
 function restartGame() {
   win = false;
   snowman.pos.y = 100;
+  snowman.vel.y = 0; // Reset velocity to zero
   spacePressed = false;
   downArrowPressed = false;
 }
