@@ -43,7 +43,7 @@ function draw() {
 
   //ground
   fill(255, 255, 255);
-  noStroke();
+  stroke(0, 0, 0);
   rect(0, height - 20, width, 20);
 
   // Draw snowman (rocket)
@@ -104,7 +104,7 @@ function Snowman(x, y) {
   this.acc = createVector(0, 0);
 
   this.applyThrust = function (force) {
-    let thrust = createVector(0, -1);
+    let thrust = createVector(0, -0.5);
     thrust.mult(force);
     this.acc.add(thrust);
   };
@@ -126,6 +126,7 @@ function Snowman(x, y) {
   };
 
   this.show = function () {
+    noStroke();
     fill(255);
     ellipseMode(CENTER);
     // Bottom circle
