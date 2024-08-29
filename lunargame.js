@@ -1,3 +1,5 @@
+//Source: youtube https://youtu.be/McjBZ9NNgGQ?si=pX7FQGP2sR30tVBG  Naveen Hettiwaththa - coding moon lander Basic version using p5 js 13.02.2018
+
 let snowman;
 let gravity = 0.05;
 let state = "start";
